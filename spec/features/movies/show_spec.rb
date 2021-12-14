@@ -15,7 +15,6 @@ RSpec.describe 'the show page' do
       expect(page).to have_content(raider.creation_year)
       expect(page).to have_content(raider.genre)
 
-      # save_and_open_page
       expect(bob.name).to appear_before(frank.name)
       expect(page).to_not have_content(donkey.name)
     end
@@ -23,6 +22,22 @@ RSpec.describe 'the show page' do
       visit "/movies/#{raider.id}"
 
       expect(page).to have_content(40.5)
+    end
+    it "does not show actors that are not in movie" do
+      visit "/movies/#{raider.id}"
+
+      expect(page).to_not have_content(donkey.name)
+    end
+    it "has a form to add new actors, after submitting, user is returned to show page with new actor" do
+      visit "/movies/#{raider.id}"
+
+      expect(page).to have_button('Submit')
+      fill_in('search_by_name', with: "Donkey")
+      click_on("Submit")
+      expect(current_path).to eq("/movies/#{raider.id}")
+      expect(page).to have_content("Donkey")
+      # save_and_open_page
+
     end
   end
 end

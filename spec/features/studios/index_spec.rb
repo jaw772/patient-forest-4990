@@ -14,7 +14,7 @@ RSpec.describe 'the index page' do
 
     it "underneath each studio there is all of its movies" do
       visit '/studios'
-      save_and_open_page
+      # save_and_open_page
       expect(universal.name).to appear_before(raider.title)
     end
   end
