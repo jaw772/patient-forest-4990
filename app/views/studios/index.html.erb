@@ -3,10 +3,10 @@
 
 <% @studios.each do |studio| %>
   <h3>
-    <span>Name: <%= "#{studio.name}" %></span>
-    <span>Location: <%= "#{studio.location}" %></span><br>
-    <%= "Movies: #{(studio.movies.each do |movie|
-      movie.title
-    end )}" %>
+    Name: <%= "#{studio.name}" %><br>
+    Location: <%= "#{studio.location}" %><br>
+    Movies: <%  studio.movies.each do |movie| %>
+      <%= "#{movie.title}, " %>
+    <% end %>
   </h3>
 <% end %>
